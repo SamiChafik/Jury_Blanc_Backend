@@ -19,17 +19,22 @@ public class Announcement {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Long id;
-    String departure;
-    String final_destination;
-    String Stages;
-    String maximum_dimensions;
-    String goods_type;
-    String capacity;
-    LocalDate date;
+    private Long id;
+    private String departure;
+    private String final_destination;
+
+    private String Stages;
+    private String maximum_dimensions;
+    private String goods_type;
+    private String capacity;
+    private LocalDate date;
     @Enumerated(EnumType.STRING)
-    AnnoncementStatus status;
+    private AnnoncementStatus status;
 
     @OneToMany(mappedBy = "announcement", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Request> requests = new ArrayList<>();
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "driver_id")
+    private Driver driver;
 }
