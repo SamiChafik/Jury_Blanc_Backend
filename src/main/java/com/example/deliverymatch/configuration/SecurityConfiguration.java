@@ -30,6 +30,8 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests( auth -> auth
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/trip/**").hasRole("DRIVER")
+                        .requestMatchers("/announcements/**").hasAnyRole("DRIVER", "ADMIN")
+                        .requestMatchers("/**").permitAll()
                         .anyRequest()
                         .authenticated()
                 )
