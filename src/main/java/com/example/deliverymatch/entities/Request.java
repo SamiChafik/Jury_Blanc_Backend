@@ -24,6 +24,10 @@ public class Request {
     @JoinColumn(name = "announcement_id")
     private Announcement announcement;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "sender_id")
+    private Sender sender;
+
     public Long getId() {
         return id;
     }
@@ -70,5 +74,13 @@ public class Request {
 
     public void setAnnouncement(Announcement announcement) {
         this.announcement = announcement;
+    }
+
+    public Sender getSender() {
+        return sender;
+    }
+
+    public void setSender(Sender sender) {
+        this.sender = sender;
     }
 }
