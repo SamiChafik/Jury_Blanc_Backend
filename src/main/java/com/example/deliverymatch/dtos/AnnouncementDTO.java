@@ -23,6 +23,10 @@ public class AnnouncementDTO {
 //    private Long driverId;
     private String driverName;
 
+    public AnnouncementDTO(AnnoncementStatus status) {
+        this.status = status;
+    }
+
     public Long getId() {
         return id;
     }
