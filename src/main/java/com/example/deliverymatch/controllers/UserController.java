@@ -9,6 +9,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("*")
 public class UserController {
     private final UserService service;
 
@@ -26,6 +27,12 @@ public class UserController {
     @PutMapping("/update/{id}")
     public UserDTO updateUser(@RequestBody UserDTO dto, @PathVariable Long id){
         return service.updateUser(id,dto);
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @PutMapping("/updateRole/{id}")
+    public UserDTO updateUserRole(@RequestBody UserDTO dto, @PathVariable Long id){
+        return service.updateUserRole(id,dto);
     }
 
     @PreAuthorize("hasRole('ADMIN')")
