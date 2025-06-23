@@ -76,6 +76,16 @@ public class AnnouncementService {
     }
 
     @Transactional
+    public AnnouncementDTO updateStatus(Long id, AnnouncementDTO announcementDTO) {
+        Announcement existingAnnouncement = announcementRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Announcement not found with id: " + id));
+
+        existingAnnouncement.setStatus(announcementDTO.getStatus());
+        Announcement updatedAnnouncement = announcementRepository.save(existingAnnouncement);
+        return announcementMapper.toDTO(updatedAnnouncement);
+    }
+
+    @Transactional
     public void deleteAnnouncement(Long id) {
         if (!announcementRepository.existsById(id)) {
             throw new EntityNotFoundException("Announcement not found with id: " + id);
