@@ -34,6 +34,16 @@ public class UserService {
         return mapper.toDTO(savedUser);
     }
 
+    public UserDTO updateUserRole(Long id, UserDTO dto){
+        User user = repository.findById(id).orElse(null);
+        if (user == null){
+            throw new RuntimeException("user not found");
+        }
+        user.setRole(dto.getRole());
+        User savedUser = repository.save(user);
+        return mapper.toDTO(savedUser);
+    }
+
     public List<UserDTO> getUsersList(){
         List<User> users = repository.findAll();
         return mapper.toDTOs(users);
